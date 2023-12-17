@@ -1,17 +1,16 @@
 <template>
-        <div class="topnav">
-            <h1 class="header-title">Header Component</h1>
-            <div class="nav-links">
-            <router-link to="/" class="nav-item" :class="{ active: $route.path === '/' }">Home</router-link>
-            
-            
-        </div>
+  <div class="topnav">
+    <div class="nav-links">
+      <router-link to="/" class="nav-item" :class="{ active: $route.path === '/' }">Home</router-link>
+      <span>|</span> <!-- Add a separator between links -->
+      <router-link to="/contact-us" class="nav-item" :class="{ active: $route.path === '/contactus' }">Contacts</router-link>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'CompoHeader'
+  name: 'CompoHeader'
 };
 </script>
 
@@ -34,6 +33,10 @@ export default {
 
 .nav-links {
   display: inline-block; 
+}
+.nav-links span {
+  margin: 0 10px; /* Adjust the spacing of the separator */
+  color: black;
 }
 
 .nav-item {
