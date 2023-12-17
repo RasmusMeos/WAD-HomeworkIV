@@ -3,7 +3,8 @@
             <h1 class="header-title">Header Component</h1>
             <div class="nav-links">
             <router-link to="/" class="nav-item" :class="{ active: $route.path === '/' }">Home</router-link>
-            <router-link to="/signup" class="nav-item" :class="{ active: $route.path === '/signup' }">Signup</router-link>
+            
+            
         </div>
     </div>
 </template>
