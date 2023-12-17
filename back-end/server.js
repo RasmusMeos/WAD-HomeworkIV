@@ -81,6 +81,16 @@ app.delete('/posts/:id', async (req, res) => {
 
 // Authentication and other routes can be added here as needed
 
+// Route to delete all posts
+app.delete('/posts', async (req, res) => {
+    try {
+        await deleteAllPosts(); // Call the function to delete all posts
+        res.status(200).send('All posts deleted successfully');
+    } catch (error) {
+        console.error('Error deleting posts:', error);
+        res.status(500).send('Server error');
+    }
+});
 app.listen(port, () => {
     console.log("Server is listening to port " + port);
 });

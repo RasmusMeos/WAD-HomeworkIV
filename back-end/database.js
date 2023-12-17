@@ -61,6 +61,10 @@ const deletePost = async (id) => {
     await pool.query('DELETE FROM posttable WHERE id = $1;', [id]);
 };
 
+const deleteAllPosts = async () => {
+    await pool.query('DELETE from posttable');
+};
+
 module.exports = {
     pool,
     createPostTable,
@@ -68,5 +72,6 @@ module.exports = {
     getAllPosts,
     getPostById,
     updatePost,
-    deletePost
+    deletePost,
+    deleteAllPosts
 };

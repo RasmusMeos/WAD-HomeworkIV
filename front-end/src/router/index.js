@@ -28,7 +28,7 @@ const routes = [
     component: ContactUs
   },
   {
-    path: '/login', // Route for the Contact Us page
+    path: '/login', // Route for the login page
     name: 'LoginPage',
     component: LoginPage
   },
