@@ -3,6 +3,7 @@ import HomePage from '../views/HomePage.vue'
 import AddPost from '../views/AddPost.vue'
 import PostPage from '../views/PostPage.vue'
 import ContactUs from '../views/ContactUs.vue'
+import LoginPage from '../views/LoginPage.vue'
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/contact-us', // Route for the Contact Us page
     name: 'ContactUsPage',
     component: ContactUs
+  },
+  {
+    path: '/Login', // Route for the Contact Us page
+    name: 'LoginPage',
+    component: LoginPage
   },
 
   {
