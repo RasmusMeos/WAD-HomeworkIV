@@ -1,14 +1,20 @@
 <template>
     <div>
-      <Header />
+      <Header />    
+      <div class="logout-container">
+        <router-link to="/login">
+    <button class="logout-button">Logout</button>
+    </router-link>
+      </div>
+    
       <div class="content-area">
         <div class="sidebox"></div>
         <div class="posts">
           <Post v-for="post in posts" :key="post.id" :post="post" />
         
-         <!-- Buttons at the bottom -->
+         
          <div class="buttons-container">
-          <router-link to="/add-post">
+          <router-link to="/addpost">
             <button class="add-post-button">Add post</button>
           </router-link>
           <button class="delete-all-button" @click="handleDeleteAll">Delete all</button>
@@ -71,13 +77,20 @@
       flex-direction: column;
       gap: 20px;
     }
+
+    .logout-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
     .buttons-container {
         display: flex;
         justify-content: space-between;
-        margin-top: 20px;
     }
+
+   
   
-    .add-post-button, .delete-all-button {
+    .logout-button, .add-post-button, .delete-all-button {
       margin-top: 20px;
       padding: 15px 20px;
       background-color: rgb(122, 175, 255);
@@ -88,8 +101,9 @@
       transition: background-color 0.3s;
       align-self: center;
     }
+   
   
-    .add-post-button:hover, .delete-all-button:hover {
+    .logout-button:hover, .add-post-button:hover, .delete-all-button:hover {
       background-color: rgb(72, 145, 255);
     }
     </style>

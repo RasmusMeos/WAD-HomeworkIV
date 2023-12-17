@@ -7,7 +7,7 @@ import ContactUs from '../views/ContactUs.vue'
 const routes = [
   {
     path: '/',
-    name: 'MainPage',
+    name: 'HomePage',
     component: HomePage
   },
   {
