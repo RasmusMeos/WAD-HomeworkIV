@@ -4,6 +4,7 @@ import AddPost from '../views/AddPost.vue'
 import PostPage from '../views/PostPage.vue'
 import ContactUs from '../views/ContactUs.vue'
 import LoginPage from '../views/LoginPage.vue'
+import SignupPage from '../views/SignupPage.vue'
 
 const routes = [
   {
@@ -17,12 +18,17 @@ const routes = [
     component: AddPost
   },
   {
+    path: '/signup',
+    name: 'Signup',
+    component: SignupPage
+  },
+  {
     path: '/contact-us', // Route for the Contact Us page
     name: 'ContactUsPage',
     component: ContactUs
   },
   {
-    path: '/Login', // Route for the Contact Us page
+    path: '/login', // Route for the Contact Us page
     name: 'LoginPage',
     component: LoginPage
   },

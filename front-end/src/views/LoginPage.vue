@@ -87,7 +87,13 @@ export default {
   margin-bottom: 15px;
 }
 
+.input-group input {
+  border-radius: 8px;
+  padding: 10px;
+}
+
 .input-group label {
+  width: 100px; /* Adjust the width as needed */
   margin-right: 10px;
 }
 

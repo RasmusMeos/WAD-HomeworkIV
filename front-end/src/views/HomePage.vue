@@ -14,7 +14,7 @@
         
          
          <div class="buttons-container">
-          <router-link to="/addpost">
+          <router-link to="/signup">
             <button class="add-post-button">Add post</button>
           </router-link>
           <button class="delete-all-button" @click="handleDeleteAll">Delete all</button>
