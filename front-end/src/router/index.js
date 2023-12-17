@@ -1,18 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MainPage from '../views/MainPage.vue'
+import HomePage from '../views/HomePage.vue'
 import AddPost from '../views/AddPost.vue'
 import PostPage from '../views/PostPage.vue'
+import ContactUs from '../views/ContactUs.vue'
 
 const routes = [
   {
     path: '/',
     name: 'MainPage',
-    component: MainPage
+    component: HomePage
   },
   {
     path: '/addpost',
     name: 'AddPost',
     component: AddPost
+  },
+  {
+    path: '/contact-us', // Route for the Contact Us page
+    name: 'ContactUsPage',
+    component: ContactUs
   },
 
   {
