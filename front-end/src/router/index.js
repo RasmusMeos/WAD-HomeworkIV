@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+//import store from '../store'
 import HomePage from '../views/HomePage.vue'
 import AddPost from '../views/AddPost.vue'
 import PostPage from '../views/PostPage.vue'
@@ -10,12 +11,14 @@ const routes = [
   {
     path: '/',
     name: 'HomePage',
-    component: HomePage
+    component: HomePage,
+    meta: { requiresAuth: true }
   },
   {
     path: '/addpost',
     name: 'AddPost',
-    component: AddPost
+    component: AddPost,
+    meta: { requiresAuth: true }
   },
   {
     path: '/signup',
@@ -36,7 +39,8 @@ const routes = [
   {
     path: '/post/:id',
     name: 'PostPage',
-    component: PostPage
+    component: PostPage,
+    meta: { requiresAuth: true }
   }
 
 ];
@@ -45,5 +49,16 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+// Navigation guard to check for authentication
+/*router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth) && !store.getters.isLoggedIn) {
+    // Redirect to login page if not authenticated
+    next({ name: 'LoginPage' });
+  } else {
+    next(); // Proceed to route
+  }
+});*/
+
 
 export default router

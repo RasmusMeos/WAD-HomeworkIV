@@ -69,13 +69,16 @@ export default createStore({
             
           },
               // Action for user signup
-    async signup(userData) {
-        try {
-          await axiosInstance.post('/signup', userData);
-        } catch (error) {
-            console.error('Error signing up:', error);
-        }
-      },
+              async signup(userData) {
+                console.log("Signup action called", userData);
+                try {
+                    const response = await axiosInstance.post('/signup', userData);
+                    console.log("Response received", response.data);
+                    // handle the response
+                } catch (error) {
+                    console.error('Error signing up:', error);
+                }
+            },
   
       // Action for user login
       async login(userData) {
