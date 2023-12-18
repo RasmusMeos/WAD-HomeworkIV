@@ -43,7 +43,7 @@ export default {
       if (this.postBody) {
         await this.updatePostById({ id: this.postId, body: this.postBody });
         this.$router.push('/');
-        // Redirect or give feedback
+        // Redirect to home
       }
     },
     async deletePost() {
