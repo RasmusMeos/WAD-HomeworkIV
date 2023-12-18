@@ -1,6 +1,6 @@
 // server.js
 const express = require('express');
-const { pool, createPostTable, addPost, getAllPosts, getPostById, updatePost, deletePost } = require('./database');
+const { pool, createPostTable, addPost, getAllPosts, getPostById, updatePost, deletePost, deleteAllPosts } = require('./database');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
@@ -18,9 +18,9 @@ createPostTable().catch(console.error);
 
 // Route to add a new post
 app.post('/posts', async (req, res) => {
-    const { title, body, urllink } = req.body;
+    const { body } = req.body;
     try {
-        const newPost = await addPost(title, body, urllink);
+        const newPost = await addPost(body);
         res.status(201).json(newPost);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -55,9 +55,9 @@ app.get('/posts/:id', async (req, res) => {
 // Route to update a post
 app.put('/posts/:id', async (req, res) => {
     const { id } = req.params;
-    const { title, body, urllink } = req.body;
+    const {body} = req.body;
     try {
-        const updatedPost = await updatePost(id, title, body, urllink);
+        const updatedPost = await updatePost(id, body);
         if (updatedPost) {
             res.json(updatedPost);
         } else {

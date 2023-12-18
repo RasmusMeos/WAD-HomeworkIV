@@ -16,9 +16,8 @@ const createPostTable = async () => {
         await client.query(`
             CREATE TABLE IF NOT EXISTS posttable (
                 id SERIAL PRIMARY KEY,
-                title VARCHAR(200) NOT NULL,
-                body VARCHAR(200) NOT NULL,
-                urllink VARCHAR(200)
+                time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                body VARCHAR(200) NOT NULL
             );
         `);
     } finally {
@@ -27,17 +26,17 @@ const createPostTable = async () => {
 };
 
 // Add a new post
-const addPost = async (title, body, urllink) => {
+const addPost = async (body) => {
     const result = await pool.query(
-        'INSERT INTO posttable (title, body, urllink) VALUES ($1, $2, $3) RETURNING *;',
-        [title, body, urllink]
+        'INSERT INTO posttable (body) VALUES ($1) RETURNING *;',
+        [body]
     );
     return result.rows[0];
 };
 
 // Get all posts
 const getAllPosts = async () => {
-    const result = await pool.query('SELECT * FROM posttable;');
+    const result = await pool.query(`SELECT id, body, to_char(time, 'Mon DD, YYYY') as time FROM posttable;`);
     return result.rows;
 };
 
@@ -48,10 +47,10 @@ const getPostById = async (id) => {
 };
 
 // Update a post
-const updatePost = async (id, title, body, urllink) => {
+const updatePost = async (id, body) => {
     const result = await pool.query(
-        'UPDATE posttable SET title = $2, body = $3, urllink = $4 WHERE id = $1 RETURNING *;',
-        [id, title, body, urllink]
+        'UPDATE posttable SET body = $2 WHERE id = $1 RETURNING *;',
+        [id, body]
     );
     return result.rows[0];
 };
@@ -62,7 +61,7 @@ const deletePost = async (id) => {
 };
 
 const deleteAllPosts = async () => {
-    await pool.query('DELETE from posttable');
+    await pool.query('DELETE FROM posttable');
 };
 
 module.exports = {

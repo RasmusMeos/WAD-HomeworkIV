@@ -4,7 +4,7 @@
     
     <div class="outer-container">
       <div class="signup-container">
-        <form class="signup-form" @submit.prevent="handleSignup">
+        <form class="signup-form" @submit.prevent="handleAddPost">
 
           <div class = "add-post">
             <label for="post">Add Post</label>
@@ -15,7 +15,7 @@
           <div class="form-group">
             
             <label for="body">Body</label>
-            <input type="body" id="body" name="body" placeholder="body" v-model="email" />
+            <input type="body" id="body" name="body" placeholder="body" v-model="body" />
           </div>
 
           <button type="submit" class="add-button">Add</button>
@@ -30,15 +30,29 @@
 <script>
 import Header from '@/components/CompoHeader.vue';
 import Footer from '@/components/CompoFooter.vue';
+import { mapActions } from 'vuex';
 
 export default {
   components: {
     Header,
     Footer
+  },
+  data() {
+    return {
+      body: '' //will bind to the input field
+    };
+  },
+  methods: {
+    ...mapActions(['addPost']),
+    async handleAddPost() {
+      if (this.body) {
+        await this.addPost({ body: this.body });
+        this.body = ''; // Resetting the input field after submission
+        this.$router.push('/'); // Redirecting to home page after adding the post
+      }
+    }
   }
-}
-
-
+};
 
 </script>
   
@@ -98,13 +112,13 @@ export default {
   color: black;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
   align-self: center; /* Center the button */
   margin-top: 20px; /* Spacing from the last input field */
 }
 
-.signup-button:hover {
+.add-button:hover {
   background-color: rgb(72, 145, 255);
 }
 

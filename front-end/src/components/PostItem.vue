@@ -1,34 +1,33 @@
 <template>
-  <div class="post">
+  <div class="post" @click="goToPostPage(post.id)">
     <div class="post-header">
       <img class="user-pic" src="/profile_pics/profile_pic.jpg" alt="User">
       <p v-if="post.title" class="post-title">{{ post.title }}</p>
       <p>{{ post.content }}</p>
-      <span class="post-date">{{new Date(post.create_time).toLocaleString() }}</span>
+      <span class="post-date">{{ formatDate(post.time) }}</span>
     </div>
     <div class="post-content">
       <img class="post-image" :src="post.photo_url" alt="Post" v-if="post.photo_url">
       <p>{{ post.body }}</p>
-      <img
-          class="like-button"
-          src="images/like.jpg"
-      alt="Like"
-      @click="incrementLikes(post.id)"
-      />
-      <span class="like-count"> Likes:{{ post.likes }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import router from '../router';
 
 export default {
   props: {
     post: Object,
   },
   methods: {
-    ...mapMutations(['incrementLikes']),
+    goToPostPage(postId) {
+      router.push({ name: 'PostPage', params: { id: postId } });
+    },
+    formatDate(isoDate) {
+      const date = new Date(isoDate);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    },
   },
 };
 </script>
@@ -85,5 +84,11 @@ export default {
 /* Adds styling for the border between posts */
 .posts .post + .post {
   border-top: 1px solid #c5c5c5;
+}
+.post {
+  cursor:pointer;
+}
+.post:hover {
+  background-color: #bdbdbd;
 }
 </style>

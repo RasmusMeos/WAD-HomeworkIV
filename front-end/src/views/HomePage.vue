@@ -12,7 +12,6 @@
       <div class="posts">
         <Post v-for="post in posts" :key="post.id" :post="post" />
 
-
         <div class="buttons-container">
           <router-link to="/addpost">
             <button class="add-post-button">Add post</button>

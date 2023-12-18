@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <Header />
     <div class="light-green-container">
       <div class="grey-container">
@@ -8,42 +8,62 @@
       <div class="white-container">
         <div class="form-group">
           <label for="body">Body</label>
-          <input type="text" id="body" name="body" placeholder="body" v-model="body" />
+          <input type="text" id="body" name="body" placeholder="body" v-model="postBody" />
         </div>
 
         <div class="button-container">
-          <button type="submit" class="update-button">Update</button>
-          <button type="submit" class="delete-button">Delete</button>
+          <button @click="updatePost" class="update-button">Update</button>
+          <button @click="deletePost" class="delete-button">Delete</button>
         </div>
       </div>
     </div>
     <Footer />
-</div>
-
-  </template>
+  </div>
+</template>
   
+<script>
+import { mapActions } from 'vuex';
+import Header from '@/components/CompoHeader.vue';
+import Footer from '@/components/CompoFooter.vue';
 
-
-
-
-
-  <script>
-  import Header from '@/components/CompoHeader.vue';
-  import Footer from '@/components/CompoFooter.vue';
-  
-  export default {
-    components: {
-      Header,
-      Footer
+export default {
+  components: {
+    Header,
+    Footer
+  },
+  data() {
+    return {
+      postBody: '', 
+      postId: null,  
+    };
+  },
+  methods: {
+    ...mapActions(['fetchPost', 'updatePostById', 'deletePostById']),
+    async updatePost() {
+      if (this.postBody) {
+        await this.updatePostById({ id: this.postId, body: this.postBody });
+        this.$router.push('/');
+        // Redirect or give feedback
+      }
+    },
+    async deletePost() {
+      await this.deletePostById(this.postId);
+      this.$router.push('/');
+      
+    },
+  },
+  async created() {
+    this.postId = this.$route.params.id;
+    const post = await this.fetchPost(this.postId);
+    if (post) {
+      this.postBody = post.body; // Making sure the post is defined before accessing its properties
+    } else {
+      console.error('Post not found');
+      // Handling the case where post is not found, e.g., redirect to home page
     }
   }
-  
-  
-
-
-
-  
-  </script>
+};
+</script>
     
     <style scoped>
   
@@ -98,7 +118,7 @@
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
 }
 
@@ -111,7 +131,7 @@
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
 }
 
